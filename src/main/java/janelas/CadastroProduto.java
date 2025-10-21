@@ -4,6 +4,8 @@
  */
 package janelas;
 
+import BD.conexao;
+
 /**
  *
  * @author arthur.mpenteado
