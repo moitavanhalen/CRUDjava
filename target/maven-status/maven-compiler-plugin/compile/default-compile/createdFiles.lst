@@ -1,5 +1,6 @@
 janelas\CadastroProduto.class
 BD\conexao.class
+DAO\ProdutoDAO.class
 Objetos\ProdutoTableModel.class
 janelas\CadastroProduto$1.class
 janelas\CadastroProduto$3.class

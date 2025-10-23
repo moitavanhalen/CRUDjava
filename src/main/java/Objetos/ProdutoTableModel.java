@@ -4,6 +4,7 @@
  */
 package Objetos;
 
+import DAO.ProdutoDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -62,5 +63,19 @@ public class ProdutoTableModel extends AbstractTableModel {
     
     public Produto pegaDadosLinha(int linha){
         return dados.get(linha);
+    }
+    
+    private void lerDados(){
+        ProdutoDAO pdao = new ProdutoDAO();
+        
+        for (Produto p : pdao.read()) {
+            this.addLinha(p);
+        }
+        this.fireTableDataChanged();
+    }
+    public void recarregaTabela(){
+         this.dados.clear();
+         lerDados();
+         this.fireTableDataChanged();
     }
 }
