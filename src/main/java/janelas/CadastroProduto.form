@@ -205,6 +205,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="cadastrar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBCadastrarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBAlterar">
           <Properties>
@@ -242,6 +245,9 @@
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTProdutosMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

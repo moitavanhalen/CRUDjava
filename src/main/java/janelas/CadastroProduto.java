@@ -4,7 +4,7 @@
  */
 package janelas;
 
-import BD.conexao;
+import Objetos.Produto;
 import Objetos.ProdutoTableModel;
 
 /**
@@ -13,7 +13,7 @@ import Objetos.ProdutoTableModel;
  */
 public class CadastroProduto extends javax.swing.JFrame {
     ProdutoTableModel modelo = new ProdutoTableModel();
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastroProduto.class.getName());
+  
 
     /**
      * Creates new form CadastroProduto
@@ -85,6 +85,11 @@ public class CadastroProduto extends javax.swing.JFrame {
         });
 
         jBCadastrar.setText("cadastrar");
+        jBCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCadastrarActionPerformed(evt);
+            }
+        });
 
         jBAlterar.setText("alterar");
         jBAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -162,6 +167,11 @@ public class CadastroProduto extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTProdutosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTProdutos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,13 +214,37 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jTDescriçãoActionPerformed
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
-        // TODO add your handling code here:
+      if (jTProdutos.getSelectedRow() != -1){
+          modelo.removeLinha(jTProdutos.getSelectedRow());
+      }
     }//GEN-LAST:event_jBExcluirActionPerformed
 
     private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBAlterarActionPerformed
 
+    private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
+        Produto p = new Produto();
+        p.setDescricao(jTDescrição.getText());
+        p.setQuantidade(Integer.parseInt(jTQuantidade.getText()));
+        p.setValor(Double.valueOf(jTValor.getText()));
+        modelo.addLinha(p);
+        limpaCampos();
+    }//GEN-LAST:event_jBCadastrarActionPerformed
+
+    private void jTProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTProdutosMouseClicked
+        if (jTProdutos.getSelectedRow() != -1) {
+            Produto p = modelo.pegaDadosLinha(jTProdutos.getSelectedRow());
+            jTDescrição.setText(p.getDescricao());
+            jTQuantidade.setText(String.valueOf(p.getQuantidade()));
+            jTValor.setText((String.valueOf(p.getValor())));
+        }
+    }//GEN-LAST:event_jTProdutosMouseClicked
+    private void limpaCampos(){
+        jTDescrição.setText("");
+        jTQuantidade.setText("");
+        jTValor.setText("");
+    }
     /**
      * @param args the command line arguments
      */
@@ -220,16 +254,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
+       
         //</editor-fold>
 
         /* Create and display the form */
